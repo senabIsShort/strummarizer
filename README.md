@@ -3,7 +3,7 @@
 Author : Abdurrahman SEN  
 This is my submission for the coding task: Structuring and Summarising Dialogue Progression.  
 
-A `requirements.txt` file is provided to install necessary libraries (spaCy + Ollama).  
+A `requirements.txt` file is provided to install necessary python libraries (spaCy + Ollama). Subtask 2 uses [Ollama](https://ollama.com/download) to run the LLM locally.  
 
 Each subtasks is treated independently, with the output printed in the terminal.  
 
@@ -41,7 +41,7 @@ For this subtask, I decided against using an OpenAI API endpoint simply due to p
 
 ### Prerequisites
 
-If it isn't installed yet, install Ollama using `curl -fsSL https://ollama.com/install.sh | sh`.  
+If it isn't installed yet, install [Ollama](https://ollama.com/download) using `curl -fsSL https://ollama.com/install.sh | sh`.  
 Afterwards, either use the `requirements.txt` or install the python ollama package using `pip install ollama`.  
 
 Please pull the `llama3.2:3b` model on your machine using `ollama pull llama3.2:3b` in a terminal (requires around 2GB of space).  
