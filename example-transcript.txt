@@ -1,0 +1,7 @@
+Sam: I think we should integrate the chatbot into the main website. 
+Jamie: I’m not convinced - we’ve had issues with reliability.
+Sam: True, but the latest version uses a more stable backend.
+Jamie: Have we tested it under real user conditions?
+Sam: Not yet. That’s on the roadmap for next month.
+Jamie: Then maybe we hold off integration until those results are in.
+Sam: Fair enough. I’ll prepare a status update for the next team meeting.
