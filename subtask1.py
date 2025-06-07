@@ -5,14 +5,16 @@ import spacy
 from spacy.matcher import Matcher
 
 from custom_utils import read_file
-from classify import classify_utterance
+from classifier import classify_utterance
 
 if __name__ == "__main__":
     nlp = spacy.load("en_core_web_sm")
 
     if len(sys.argv) > 1:
         if not os.path.exists(sys.argv[1]):
-            print(f"File {sys.argv[1]} does not exist. Using example-transcript.txt as default input file.")
+            print(
+                f"File {sys.argv[1]} does not exist. Using example-transcript.txt as default input file."
+            )
             file = os.path.relpath("example-transcript.txt")
         else:
             print(f"Using input file: {sys.argv[1]}")
@@ -23,8 +25,8 @@ if __name__ == "__main__":
         file = os.path.relpath("example-transcript.txt")
 
     print(f"\nProcessing {file}...\n")
-    # content = read_file("example-transcript.txt")
     content = read_file(file)
+    print(f"Dialogue:\n{content}\n")
     doc = nlp(content)
 
     matcher = Matcher(nlp.vocab)
@@ -48,7 +50,11 @@ if __name__ == "__main__":
             {"POS": "VERB", "DEP": {"IN": ["xcomp", "ccomp", "ROOT"]}, "OP": "?"},
         ],
         # Let's patterns
-        [{"POS": "VERB", "LEMMA": "let", "DEP": "ROOT"}, {"POS": "PRON", "LEMMA": r"'s"}, {"POS": "VERB"}],
+        [
+            {"POS": "VERB", "LEMMA": "let", "DEP": "ROOT"},
+            {"POS": "PRON", "LEMMA": r"'s"},
+            {"POS": "VERB"},
+        ],
         # What if pattern
         [{"LEMMA": "what"}, {"LEMMA": "if"}, {"OP": "*"}],
         # How about pattern
@@ -104,9 +110,7 @@ if __name__ == "__main__":
             "class": None,
         }
 
-        prediction = classify_utterance(
-            utterance, nlp, matcher, conversation, index
-        )
+        prediction = classify_utterance(utterance, nlp, matcher, conversation, index)
 
         conversation[index]["class"] = prediction
 
@@ -118,9 +122,10 @@ if __name__ == "__main__":
             left_aligned = not left_aligned
             previous_speaker = item["speaker"]
         if left_aligned:
-            # print(f"{item['speaker']:<10}{item['utterance']:<50}\n  {item['class']}")
             print(f"{item['speaker']} -> {item['utterance']}".ljust(80))
-            print(f"{item['class']}\n".ljust(80))
+            print(f"{item['class']}".ljust(80))
+            print("----\n".ljust(80))
         else:
             print(f"{item['utterance']} <- {item['speaker']}".rjust(80))
-            print(f"{item['class']}\n".rjust(80))
+            print(f"{item['class']}".rjust(80))
+            print("----\n".rjust(80))
